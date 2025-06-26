@@ -1,0 +1,121 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #141e30, #243b55); /* Deep Blue Gradient */
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 30px 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+/* Input styling */
+.form-group {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.form-group input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  color: #fff;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-bottom-color: #00c6ff;
+}
+
+.form-group label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  color: #aaa;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label {
+  transform: translateY(-22px);
+  font-size: 13px;
+  color: #00c6ff;
+}
+
+/* Button styling */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #0d1117;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #238636;
+  transform: translateY(-2px);
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.left-panel {
+  flex: 1;
+  padding: 1rem;
+  background: #0e0e0e00;
+  overflow-y: auto;
+  border-right: 2px solid #ccc;
+}
+
+.right-panel {
+  flex: 1;
+  padding: 1rem;
+  background: #1e1e1e61;
+  color: #0f0;
+  overflow-y: auto;
+}
+
+.output-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.output-container pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
