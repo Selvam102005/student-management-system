@@ -9,22 +9,6 @@ This is a full-stack Student Management System built using **React**, **Node.js 
 - **Backend**: Node.js, Express
 - **Database**: Oracle DB
 
-
-## 📂 Project Structure
-
-student-management-system/
-├── backend/
-│ ├── db.js
-│ ├── server.js
-│ └── routes/
-├── frontend/
-│ ├── src/
-│ └── public/
-├── .gitignore
-├── README.md
-└── LICENSE
-
-
 ## 🚀 How to Run
 
 ### Backend
