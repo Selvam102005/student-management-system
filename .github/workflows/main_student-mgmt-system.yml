@@ -11,17 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
       - name: Setup Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
-      # 3️⃣ Build frontend
       - name: Install and build frontend
         working-directory: ./Frontend
         run: |
@@ -29,21 +26,18 @@ jobs:
           npm run build
           ls -la
 
-      # 4️⃣ Install backend dependencies
-      - name: Install backend
+      - name: Install backend dependencies
         working-directory: ./Backend
         run: npm install
 
-      # 5️⃣ Copy frontend build into backend
-      - name: Move frontend build into backend
-        run: cp -r Frontend/build/* Backend/
+      - name: Copy frontend build into backend
+        run: cp -r Frontend/build/. Backend/
 
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-deploy
 
     steps:
-      # 6️⃣ Login to Azure using Service Principal
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -52,7 +46,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-      # 7️⃣ Deploy to Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
