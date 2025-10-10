@@ -3,12 +3,14 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import studentRoutes from "./routes/studentRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { getConnection } from "./config/db.js";
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/", authRoutes);
 app.use("/", studentRoutes);
 
 const PORT = process.env.PORT || 5000;
