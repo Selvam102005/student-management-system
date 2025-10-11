@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Copy frontend build into backend
-        run: cp -r Frontend/build/. Backend/
+        run: cp -r Frontend/dist/. Backend/Frontend_dist
 
   deploy:
     runs-on: ubuntu-latest
