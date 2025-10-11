@@ -1,4 +1,4 @@
-name: Build and deploy Student Management System to Azure Web App
+name: Build and Deploy Student Management System to Azure Web App
 
 on:
   push:
@@ -25,18 +25,21 @@ jobs:
       - name: Install and build frontend
         working-directory: ./Frontend
         run: |
-          npm install
+          npm ci
           npm run build
-          ls -la
+          ls -la dist
 
       # 4️⃣ Install backend dependencies
       - name: Install backend dependencies
         working-directory: ./Backend
-        run: npm install
+        run: npm ci
 
       # 5️⃣ Copy frontend build into backend
       - name: Copy frontend build into backend
-        run: cp -r Frontend/dist/. Backend/Frontend_dist/
+        run: |
+          mkdir -p Backend/Frontend_dist
+          cp -r Frontend/dist/. Backend/Frontend_dist/
+          ls -la Backend/Frontend_dist
 
   deploy:
     runs-on: ubuntu-latest
