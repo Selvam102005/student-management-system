@@ -1,4 +1,4 @@
-name: Build and Deploy Student Management System to Azure Web App
+name: Build and deploy Student Management System to Azure Web App
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repo
+      # 1️⃣ Checkout the code
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -36,23 +36,24 @@ jobs:
 
       # 5️⃣ Copy frontend build into backend
       - name: Copy frontend build into backend
-        run: cp -r Frontend/dist/. Backend/
+        run: cp -r Frontend/dist/. Backend/Frontend_dist/
 
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-deploy
 
     steps:
-      # 1️⃣ Login to Azure safely using secrets
+      # 6️⃣ Checkout code again (needed for deploy job)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 7️⃣ Login to Azure using AZURE_CREDENTIALS secret
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # 2️⃣ Deploy backend folder to Azure Web App
+      # 8️⃣ Deploy to Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
