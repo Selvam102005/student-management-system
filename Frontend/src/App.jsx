@@ -12,16 +12,18 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const displayOutput = (message) => {
-    setOutput(typeof message === 'string' ? message : JSON.stringify(message, null, 2));
-  };
+  if (typeof message === 'object') {
+    setOutput(message);
+  } else {
+    setOutput(message.toString());
+  }
+};
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/login", {
-        username,
-        password,
-      });
+      const res = await axios.post("http://localhost:5000/api/auth/login", { username, password });
 
       setMessage(res.data.message);
       if (res.data.success) {

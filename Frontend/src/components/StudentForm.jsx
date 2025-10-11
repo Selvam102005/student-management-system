@@ -43,7 +43,7 @@ const StudentForm = ({ displayOutput }) => {
     const cgpa = ((grade1 + grade2 + grade3) / 3).toFixed(2);
 
     try {
-      const res = await fetch('http://localhost:5000/insert', {
+      const res = await fetch('http://localhost:5000/api/students/insert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, name, mark1, mark2, mark3, cgpa })
@@ -62,7 +62,7 @@ const StudentForm = ({ displayOutput }) => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/delete', {
+      const res = await fetch('http://localhost:5000/api/students/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: form.deleteId })
@@ -75,18 +75,21 @@ const StudentForm = ({ displayOutput }) => {
   };
 
   const fetchStudents = async (table) => {
-    try {
-      const res = await fetch(`http://localhost:5000/fetch?table=${table}`);
-      const data = await res.json();
-      displayOutput(data);
-    } catch (err) {
-      displayOutput("Error: " + err.message);
-    }
-  };
+  try {
+    const res = await fetch(`http://localhost:5000/api/students/fetch?table=${table}`);
+    const data = await res.json();
+
+    displayOutput(data.rows || data);
+  } catch (err) {
+    displayOutput("Error: " + err.message);
+  }
+};
+
+
 
   const handleTransaction = async (action) => {
     try {
-      const res = await fetch(`http://localhost:5000/${action}`, {
+      const res = await fetch(`http://localhost:5000/api/students/${action}`, {
         method: 'POST',
       });
       const data = await res.json();
